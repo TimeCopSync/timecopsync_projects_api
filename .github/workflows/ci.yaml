@@ -1,0 +1,34 @@
+name: Continuous Integration
+
+on:
+  push:
+
+run-name: Test commit ${{ github.sha }}
+
+env:
+  MIX_ENV: test
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: isbang/compose-action@v1.5.1
+        with:
+          compose-file: "./docker-compose.test.yaml"
+
+      - name: Set up Elixir
+        uses: erlef/setup-beam@v1
+        with:
+          otp-version: 26.0.0
+          elixir-version: 1.15.0
+
+      - name: Elixir Test
+        run: |
+          mix deps.clean --all
+          mix clean
+          mix deps.get
+          mix compile
+          mix format --check-formatted
+          mix test

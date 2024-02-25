@@ -1,0 +1,68 @@
+name: Pull request
+
+on:
+  pull_request:
+    types:
+      - edited
+      - opened
+      - reopened
+      - ready_for_review
+      - synchronize
+
+run-name: Pull request ${{ github.event.number }}
+
+env:
+  MIX_ENV: test
+
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+    if: github.actor != 'dependabot[bot]'
+    steps:
+      - name: Add PR Comment
+        uses: actions/first-interaction@v1.3.0
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          pr-message: |
+            Hello @${{ github.actor }}! Thanks for contributing to the plugin!
+
+            Your PR basically need 3 things to be merged:
+              - Your PR title need to follow the [conventional commits spec](https://www.conventionalcommits.org/en/v1.0.0/)
+              - It must transpile without error and be tested
+              - An approbation
+
+  check-cc:
+    runs-on: ubuntu-latest
+    if: github.actor != 'dependabot[bot]'
+    steps:
+      - name: Check PR title
+        uses: amannn/action-semantic-pull-request@v5.4.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: isbang/compose-action@v1.5.1
+        with:
+          compose-file: "./docker-compose.test.yaml"
+
+      - name: Set up Elixir
+        uses: erlef/setup-beam@v1
+        with:
+          otp-version: 26.0.0
+          elixir-version: 1.15.0
+
+      - name: Elixir Setup
+        run: |
+          mix deps.clean --all
+          mix clean
+          mix deps.get
+          mix compile
+
+      - name: Elixir Test
+        run: |
+          mix format --check-formatted
+          mix test

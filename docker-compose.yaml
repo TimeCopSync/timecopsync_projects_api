@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  db:
+    image: bitnami/postgresql
+    environment:
+      - POSTGRESQL_USERNAME=postgres
+      - POSTGRESQL_PASSWORD=postgres
+      - POSTGRESQL_DATABASE=timecopsync_projects_api_dev
+    ports:
+      - '5432:5432'
+    volumes:
+      - db_data:/bitnami/postgresql
+
+volumes:
+  db_data:
+    driver: local

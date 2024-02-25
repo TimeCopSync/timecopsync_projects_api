@@ -1,0 +1,22 @@
+# Ignore version control files
+.git
+.gitignore
+
+# Ignore build artifacts
+_build
+deps
+
+# Ignore editor files
+*.swp
+*.swo
+*.swn
+*.swm
+*.swl
+*.swk
+*.swc
+*.swo
+*.beam
+*.iml
+.idea
+.vscode
+.editorconfig
