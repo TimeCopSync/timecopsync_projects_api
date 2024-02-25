@@ -7,6 +7,9 @@
 # General application configuration
 import Config
 
+config :timecopsync_projects_api, :generators,
+  api_prefix: "/api/v1"
+
 config :timecopsync_projects_api,
   ecto_repos: [TimecopsyncProjectsApi.Repo],
   generators: [timestamp_type: :utc_datetime, binary_id: true]

@@ -5,8 +5,10 @@ defmodule TimecopsyncProjectsApiWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/api", TimecopsyncProjectsApiWeb do
+  scope "/api/v1", TimecopsyncProjectsApiWeb do
     pipe_through :api
+
+    resources "/projects", ProjectController, except: [:new, :edit]
   end
 
   # Enable LiveDashboard in development
