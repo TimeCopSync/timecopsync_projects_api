@@ -4,6 +4,7 @@ defmodule TimecopsyncProjectsApi.Projects do
   """
 
   import Ecto.Query, warn: false
+  require Logger
   alias TimecopsyncProjectsApi.Repo
 
   alias TimecopsyncProjectsApi.Projects.Project
@@ -22,7 +23,6 @@ defmodule TimecopsyncProjectsApi.Projects do
 
   - `:limit` The maximum number of projects to return
   - `:show_archived` Whether to include archived projects
-
 
   """
   def list_projects(query_opts \\ []) do
@@ -50,6 +50,27 @@ defmodule TimecopsyncProjectsApi.Projects do
 
   """
   def get_project!(id), do: Repo.get!(Project, id)
+
+  @doc """
+  Gets a single project and returns it in a ok tuple. returns an error tuple if the project does not exist.
+
+  ## Examples
+
+      iex> get_project(123)
+      {:ok, %Project{}}
+
+      iex> get_project(456)
+      {:error, "Project not found"}
+
+  """
+  @spec get_project(Ecto.UUID.t() | String.t()) :: {:error, String.t()}  | {:ok, any()}
+  def get_project(id) do
+    case Repo.get(Project, id) do
+      p when p != nil -> {:ok, p}
+      _ -> {:error, "Project not found"}
+    end
+  end
+
   @doc """
   Creates a project.
 

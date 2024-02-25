@@ -1,13 +1,19 @@
 defmodule TimecopsyncProjectsApiWeb.ProjectController do
   use TimecopsyncProjectsApiWeb, :controller
+  # alias TimecopsyncProjectsApiWeb
 
   alias TimecopsyncProjectsApi.Projects
   alias TimecopsyncProjectsApi.Projects.Project
 
   action_fallback TimecopsyncProjectsApiWeb.FallbackController
 
-  def index(conn, _params) do
-    projects = Projects.list_projects()
+  def index(conn, params) do
+    projects = Projects.list_projects(Keyword.get_and_update(
+      Enum.map(params, &{String.to_existing_atom(elem(&1,0)), elem(&1,1)}),
+      :show_archived,
+      fn v -> {v, v in [true, "true", "TRUE", 1]} end
+    ) |> elem(1))
+
     render(conn, :index, projects: projects)
   end
 

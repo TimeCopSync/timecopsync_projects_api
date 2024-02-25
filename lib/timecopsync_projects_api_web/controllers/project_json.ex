@@ -5,7 +5,12 @@ defmodule TimecopsyncProjectsApiWeb.ProjectJSON do
   Renders a list of projects.
   """
   def index(%{projects: projects}) do
-    %{data: for(project <- projects, do: data(project))}
+    %{
+      metadata: %{
+        total: length(projects)
+        # page: page,
+      },
+      data: for(project <- projects, do: data(project))}
   end
 
   @doc """

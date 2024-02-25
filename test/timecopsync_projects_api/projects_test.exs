@@ -25,8 +25,8 @@ defmodule TimecopsyncProjectsApi.ProjectsTest do
       project = project_fixture()
       project2 = project_fixture()
       project3 = project_fixture()
-      project4 = project_fixture()
-      project5 = project_fixture()
+      _project4 = project_fixture()
+      _project5 = project_fixture()
 
       assert Projects.list_projects(limit: 3) == [project, project2, project3]
     end
