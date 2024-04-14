@@ -10,7 +10,8 @@ defmodule TimecopsyncProjectsApiWeb.TimerJSON do
         total: length(timers)
         # page: page,
       },
-      data: for(timer <- timers, do: data(timer))}
+      data: for(timer <- timers, do: data(timer))
+    }
   end
 
   @doc """

@@ -13,7 +13,9 @@ defmodule TimecopsyncProjectsApiWeb.Router do
   end
 
   scope "/api/swagger" do
-    forward "/", PhoenixSwagger.Plug.SwaggerUI, otp_app: :timecopsync_projects_api, swagger_file: "swagger.json"
+    forward "/", PhoenixSwagger.Plug.SwaggerUI,
+      otp_app: :timecopsync_projects_api,
+      swagger_file: "swagger.json"
   end
 
   # Enable LiveDashboard in development

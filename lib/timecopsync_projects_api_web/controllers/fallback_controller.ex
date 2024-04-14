@@ -18,7 +18,10 @@ defmodule TimecopsyncProjectsApiWeb.FallbackController do
   def call(conn, {:error, :not_found}) do
     conn
     |> put_status(:not_found)
-    |> put_view(html: TimecopsyncProjectsApiWeb.ErrorHTML, json: TimecopsyncProjectsApiWeb.ErrorJSON)
+    |> put_view(
+      html: TimecopsyncProjectsApiWeb.ErrorHTML,
+      json: TimecopsyncProjectsApiWeb.ErrorJSON
+    )
     |> render(:"404")
   end
 end

@@ -10,7 +10,8 @@ defmodule TimecopsyncProjectsApiWeb.ProjectJSON do
         total: length(projects)
         # page: page,
       },
-      data: for(project <- projects, do: data(project))}
+      data: for(project <- projects, do: data(project))
+    }
   end
 
   @doc """

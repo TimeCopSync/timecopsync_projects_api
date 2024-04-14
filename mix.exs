@@ -10,7 +10,7 @@ defmodule TimecopsyncProjectsApi.MixProject do
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps(),
-      compilers: Mix.compilers ++ [:phoenix_swagger]
+      compilers: Mix.compilers() ++ [:phoenix_swagger]
     ]
   end
 
@@ -46,7 +46,8 @@ defmodule TimecopsyncProjectsApi.MixProject do
       {:dns_cluster, "~> 0.1.1"},
       {:bandit, "~> 1.2"},
       {:phoenix_swagger, "~> 0.8"},
-      {:ex_json_schema, "~> 0.5"} # optional
+      # optional
+      {:ex_json_schema, "~> 0.5"}
     ]
   end
 

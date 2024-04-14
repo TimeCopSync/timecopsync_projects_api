@@ -16,7 +16,7 @@ defmodule TimecopsyncProjectsApi.Projects.Project do
   def changeset(project, attrs) do
     project
     |> cast(attrs, [:name, :colour, :archived])
-    |> validate_number(:colour, greater_than_or_equal_to: 0, less_than_or_equal_to: 16777216)
+    |> validate_number(:colour, greater_than_or_equal_to: 0, less_than_or_equal_to: 16_777_216)
     |> validate_required([:name])
   end
 end

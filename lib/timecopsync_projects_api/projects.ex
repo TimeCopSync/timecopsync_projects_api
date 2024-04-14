@@ -30,7 +30,8 @@ defmodule TimecopsyncProjectsApi.Projects do
       from p in Project,
         order_by: [asc: p.name],
         # Because we show not archived projects, always
-        where: p.archived == false or p.archived == ^Keyword.get(query_opts, :show_archived, false),
+        where:
+          p.archived == false or p.archived == ^Keyword.get(query_opts, :show_archived, false),
         limit: ^Keyword.get(query_opts, :limit, 100)
     )
   end
@@ -63,7 +64,7 @@ defmodule TimecopsyncProjectsApi.Projects do
       {:error, "Project not found"}
 
   """
-  @spec get_project(Ecto.UUID.t() | String.t()) :: {:error, String.t()}  | {:ok, any()}
+  @spec get_project(Ecto.UUID.t() | String.t()) :: {:error, String.t()} | {:ok, any()}
   def get_project(id) do
     case Repo.get(Project, id) do
       p when p != nil -> {:ok, p}
@@ -179,7 +180,7 @@ defmodule TimecopsyncProjectsApi.Projects do
       {:error, "Timer not found"}
 
   """
-  @spec get_timer(Ecto.UUID.t() | String.t()) :: {:error, String.t()}  | {:ok, any()}
+  @spec get_timer(Ecto.UUID.t() | String.t()) :: {:error, String.t()} | {:ok, any()}
   def get_timer(id) do
     case Repo.get(Timer, id) do
       t when t != nil -> {:ok, t}

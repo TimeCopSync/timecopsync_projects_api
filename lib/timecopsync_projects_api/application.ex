@@ -10,7 +10,8 @@ defmodule TimecopsyncProjectsApi.Application do
     children = [
       TimecopsyncProjectsApiWeb.Telemetry,
       TimecopsyncProjectsApi.Repo,
-      {DNSCluster, query: Application.get_env(:timecopsync_projects_api, :dns_cluster_query) || :ignore},
+      {DNSCluster,
+       query: Application.get_env(:timecopsync_projects_api, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: TimecopsyncProjectsApi.PubSub},
       # Start a worker by calling: TimecopsyncProjectsApi.Worker.start_link(arg)
       # {TimecopsyncProjectsApi.Worker, arg},

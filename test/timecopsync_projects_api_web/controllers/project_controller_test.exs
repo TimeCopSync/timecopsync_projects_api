@@ -48,16 +48,18 @@ defmodule TimecopsyncProjectsApiWeb.ProjectControllerTest do
       assert json_response(conn, 422)["errors"] != %{}
     end
 
-
     test "renders errors when colour is out of range", %{conn: conn} do
-      conn = post(conn, ~p"/api/v1/projects", project: %{
-        name: "some name",
-        colour: 99999999999999999999,
-        archived: true
-      })
+      conn =
+        post(conn, ~p"/api/v1/projects",
+          project: %{
+            name: "some name",
+            colour: 99_999_999_999_999_999_999,
+            archived: true
+          }
+        )
+
       assert json_response(conn, 422)["errors"] != %{}
     end
-
   end
 
   describe "update project" do

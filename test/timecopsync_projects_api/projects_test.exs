@@ -8,7 +8,7 @@ defmodule TimecopsyncProjectsApi.ProjectsTest do
 
     import TimecopsyncProjectsApi.ProjectsFixtures
 
-    @invalid_attrs %{name: nil, colour: 9999999999999999999, archived: nil}
+    @invalid_attrs %{name: nil, colour: 9_999_999_999_999_999_999, archived: nil}
 
     test "list_projects/1 w/o params returns all projects" do
       project = project_fixture()
@@ -95,7 +95,12 @@ defmodule TimecopsyncProjectsApi.ProjectsTest do
     end
 
     test "create_timer/1 with valid data creates a timer" do
-      valid_attrs = %{description: "some description", notes: "some notes", start_time: ~U[2024-02-24 23:28:00Z], end_time: ~U[2024-02-24 23:28:00Z]}
+      valid_attrs = %{
+        description: "some description",
+        notes: "some notes",
+        start_time: ~U[2024-02-24 23:28:00Z],
+        end_time: ~U[2024-02-24 23:28:00Z]
+      }
 
       assert {:ok, %Timer{} = timer} = Projects.create_timer(valid_attrs)
       assert timer.description == "some description"
@@ -110,7 +115,13 @@ defmodule TimecopsyncProjectsApi.ProjectsTest do
 
     test "update_timer/2 with valid data updates the timer" do
       timer = timer_fixture()
-      update_attrs = %{description: "some updated description", notes: "some updated notes", start_time: ~U[2024-02-25 23:28:00Z], end_time: ~U[2024-02-25 23:28:00Z]}
+
+      update_attrs = %{
+        description: "some updated description",
+        notes: "some updated notes",
+        start_time: ~U[2024-02-25 23:28:00Z],
+        end_time: ~U[2024-02-25 23:28:00Z]
+      }
 
       assert {:ok, %Timer{} = timer} = Projects.update_timer(timer, update_attrs)
       assert timer.description == "some updated description"

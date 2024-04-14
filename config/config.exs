@@ -10,8 +10,10 @@ import Config
 config :timecopsync_projects_api, :phoenix_swagger,
   swagger_files: %{
     "priv/static/swagger.json" => [
-      router: TimecopsyncProjectsApiWeb.Router,     # phoenix routes will be converted to swagger paths
-      endpoint: TimecopsyncProjectsApiWeb.Endpoint  # (optional) endpoint config used to set host, port and https schemes.
+      # phoenix routes will be converted to swagger paths
+      router: TimecopsyncProjectsApiWeb.Router,
+      # (optional) endpoint config used to set host, port and https schemes.
+      endpoint: TimecopsyncProjectsApiWeb.Endpoint
     ]
   }
 
@@ -20,8 +22,7 @@ config :timecopsync_projects_api, :phoenix_swagger,
     "priv/static/swagger.json" => [router: TimecopsyncProjectsApiWeb.Router]
   }
 
-config :timecopsync_projects_api, :generators,
-  api_prefix: "/api/v1"
+config :timecopsync_projects_api, :generators, api_prefix: "/api/v1"
 
 config :timecopsync_projects_api,
   ecto_repos: [TimecopsyncProjectsApi.Repo],

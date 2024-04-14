@@ -16,7 +16,6 @@ defmodule TimecopsyncProjectsApi.Projects.Timer do
     timestamps(type: :utc_datetime)
   end
 
-
   defp check_chronology(_, ended) when is_nil(ended), do: :lt
 
   defp check_chronology(started, ended) do
