@@ -25,3 +25,5 @@ erl_crash.dump
 # Ignore package tarball (built via "mix hex.build").
 timecopsync_projects_api-*.tar
 
+# Ignore the openAI spec
+/priv/static/swagger.json

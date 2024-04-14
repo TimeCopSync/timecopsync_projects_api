@@ -12,6 +12,10 @@ defmodule TimecopsyncProjectsApiWeb.Router do
     resources "/timers", TimerController, except: [:new, :edit]
   end
 
+  scope "/api/swagger" do
+    forward "/", PhoenixSwagger.Plug.SwaggerUI, otp_app: :timecopsync_projects_api, swagger_file: "swagger.json"
+  end
+
   # Enable LiveDashboard in development
   if Application.compile_env(:timecopsync_projects_api, :dev_routes) do
     # If you want to use the LiveDashboard in production, you should put
@@ -26,5 +30,15 @@ defmodule TimecopsyncProjectsApiWeb.Router do
 
       live_dashboard "/dashboard", metrics: TimecopsyncProjectsApiWeb.Telemetry
     end
+  end
+
+  def swagger_info do
+    %{
+      basePath: "/api/v1",
+      info: %{
+        version: "1.0",
+        title: "TimeCopSync Projects API"
+      }
+    }
   end
 end

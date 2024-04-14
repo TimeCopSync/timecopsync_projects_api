@@ -61,3 +61,16 @@ config :phoenix, :stacktrace_depth, 20
 
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime
+
+# Live reload code only in dev mode for openAI
+config :timecopsync_projects_api, TimecopsyncProjectsApiWeb.Endpoint,
+  live_reload: [
+    patterns: [
+      ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg|json)$},
+      ~r{priv/gettext/.*(po)$},
+      ~r{lib/timecopsync_projects_api_web/views/.*(ex)$},
+      ~r{lib/timecopsync_projects_api_web/controllers/.*(ex)$},
+      ~r{lib/timecopsync_projects_api_web/templates/.*(eex)$}
+    ]
+  ],
+  reloadable_compilers: [:gettext, :phoenix, :elixir, :phoenix_swagger]
