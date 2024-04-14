@@ -9,6 +9,7 @@ defmodule TimecopsyncProjectsApiWeb.Router do
     pipe_through :api
 
     resources "/projects", ProjectController, except: [:new, :edit]
+    resources "/timers", TimerController, except: [:new, :edit]
   end
 
   # Enable LiveDashboard in development
