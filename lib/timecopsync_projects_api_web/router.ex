@@ -34,6 +34,7 @@ defmodule TimecopsyncProjectsApiWeb.Router do
 
   def swagger_info do
     %{
+      schemes: ["http", "https"],
       basePath: "/api/v1",
       info: %{
         version: "1.0",
