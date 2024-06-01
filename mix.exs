@@ -36,7 +36,7 @@ defmodule TimecopsyncProjectsApi.MixProject do
       {:phoenix, "~> 1.7.11"},
       {:phoenix_ecto, "~> 4.4"},
       {:ecto_sql, "~> 3.10"},
-      {:ecto_psql_extras, "~> 0.7.15"},
+      {:ecto_psql_extras, "~> 0.8.0"},
       {:postgrex, ">= 0.0.0"},
       {:phoenix_live_dashboard, "~> 0.8.3"},
       {:telemetry_metrics, "~> 1.0"},
