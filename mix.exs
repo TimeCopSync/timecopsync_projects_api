@@ -10,7 +10,8 @@ defmodule TimecopsyncProjectsApi.MixProject do
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps(),
-      compilers: Mix.compilers() ++ [:phoenix_swagger]
+      compilers: Mix.compilers() ++ [:phoenix_swagger],
+      versioning: versioning()
     ]
   end
 
@@ -64,6 +65,14 @@ defmodule TimecopsyncProjectsApi.MixProject do
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
       swagger: ["phx.swagger.generate"]
+    ]
+  end
+
+  defp versioning do
+    [
+      tag_prefix: "v",
+      commit_msg: "chore: bump to %s",
+      annotate: false
     ]
   end
 end
