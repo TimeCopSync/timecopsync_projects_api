@@ -4,7 +4,7 @@ defmodule TimecopsyncProjectsApi.MixProject do
   def project do
     [
       app: :timecopsync_projects_api,
-      version: "1.0.0",
+      version: "1.0.1",
       elixir: "~> 1.14",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
