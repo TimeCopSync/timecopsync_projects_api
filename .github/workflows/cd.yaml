@@ -17,6 +17,8 @@ jobs:
         with:
           token: ${{ github.token }}
           tag: ${{ github.ref_name }}
+          excludeTypes: build,docs,other,style
+          excludeScopes: ci,cicd
 
       - name: Create Release
         uses: ncipollo/release-action@v1.14.0
@@ -54,4 +56,4 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           push: true
-          tags: ghcr.io/timecopsync/crud:${{ steps.no-v.outputs.no-v }},ghcr.io/timecopsync/crud:latest
+          tags: ghcr.io/timecopsync/project-api:${{ steps.no-v.outputs.no-v }},ghcr.io/timecopsync/project-api:latest
