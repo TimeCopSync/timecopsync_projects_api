@@ -45,7 +45,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: isbang/compose-action@v2.0.1
+      - uses: isbang/compose-action@v2.0.2
         with:
           compose-file: "./docker-compose.test.yaml"
 
