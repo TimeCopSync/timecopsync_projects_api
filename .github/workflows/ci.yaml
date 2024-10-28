@@ -31,4 +31,4 @@ jobs:
           mix deps.get
           mix compile
           mix format --check-formatted
-          mix test
+          mix tc

@@ -65,4 +65,4 @@ jobs:
       - name: Elixir Test
         run: |
           mix format --check-formatted
-          mix test
+          mix tc

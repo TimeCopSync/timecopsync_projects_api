@@ -47,6 +47,7 @@ defmodule TimecopsyncProjectsApi.MixProject do
       {:dns_cluster, "~> 0.1.1"},
       {:bandit, "~> 1.2"},
       {:phoenix_swagger, "~> 0.8"},
+      {:testcontainers, "~> 1.10"},
       # optional
       {:ex_json_schema, "~> 0.5"}
     ]
@@ -64,7 +65,8 @@ defmodule TimecopsyncProjectsApi.MixProject do
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
-      swagger: ["phx.swagger.generate"]
+      swagger: ["phx.swagger.generate"],
+      tc: [ "testcontainers.test", "--database", "postgres" ] # run tests with testcontainers
     ]
   end
 
