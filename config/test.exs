@@ -4,7 +4,6 @@ config :testcontainers,
   log_level: :debug,
   enabled: true
 
-
 # Configure your database
 #
 # The MIX_TEST_PARTITION environment variable can be used

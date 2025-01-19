@@ -49,7 +49,8 @@ defmodule TimecopsyncProjectsApi.MixProject do
       {:phoenix_swagger, "~> 0.8"},
       {:testcontainers, "~> 1.10"},
       # optional
-      {:ex_json_schema, "~> 0.5"}
+      {:ex_json_schema, "~> 0.5"},
+      {:pre_commit, "~> 0.3.4", only: :dev}
     ]
   end
 
@@ -66,7 +67,8 @@ defmodule TimecopsyncProjectsApi.MixProject do
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
       swagger: ["phx.swagger.generate"],
-      tc: [ "testcontainers.test", "--database", "postgres" ] # run tests with testcontainers
+      # run tests with testcontainers
+      tc: ["testcontainers.test", "--database", "postgres"]
     ]
   end
 
