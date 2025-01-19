@@ -50,6 +50,7 @@ defmodule TimecopsyncProjectsApi.MixProject do
       {:testcontainers, "~> 1.10"},
       # optional
       {:ex_json_schema, "~> 0.5"},
+      {:healthchex, "~> 0.2"},
       {:pre_commit, "~> 0.3.4", only: :dev}
     ]
   end

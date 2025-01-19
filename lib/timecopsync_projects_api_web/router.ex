@@ -5,6 +5,14 @@ defmodule TimecopsyncProjectsApiWeb.Router do
     plug :accepts, ["json"]
   end
 
+  scope "/health" do
+    forward "/live", Healthchex.Probes.Liveness, resp: ""
+
+    forward "/ready", Healthchex.Probes.Readiness,
+      probe: &TimecopsyncProjectsApi.Health.has_started?/0,
+      resp: ""
+  end
+
   scope "/api/v1", TimecopsyncProjectsApiWeb do
     pipe_through :api
 
