@@ -92,6 +92,6 @@ USER nobody
 EXPOSE 8080
 
 HEALTHCHECK --interval=5s --timeout=10s --start-period=5s --retries=3 \
-  CMD "wget -O http://localhost:8080/health/live 2> /dev/null"
+  CMD wget --no-verbose --tries=1 --spider http://localhost:8080/health/live  || exit 1
 
 CMD ["/app/bin/server"]
