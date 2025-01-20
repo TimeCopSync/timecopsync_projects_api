@@ -1,0 +1,560 @@
+{
+  "info": {
+    "version": "1.0",
+    "title": "TimeCopSync Projects API"
+  },
+  "definitions": {
+    "Project": {
+      "description": "A project consists of a collection of timers",
+      "example": {
+        "archived": false,
+        "colour": 16777215,
+        "id": "0f9ce9be-a720-41df-83bc-ad6ccb4738ec",
+        "name": "My awesome project!"
+      },
+      "properties": {
+        "archived": {
+          "description": "Archived status",
+          "type": "boolean"
+        },
+        "colour": {
+          "description": "Colour associated represented by hex values casted into integer",
+          "type": "integer"
+        },
+        "id": {
+          "description": "Project ID",
+          "type": "string"
+        },
+        "name": {
+          "description": "Project name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "Project",
+      "type": "object"
+    },
+    "ProjectInput": {
+      "description": "A project consists of a collection of timers, use this schema for creating or updating a project",
+      "example": {
+        "project": {
+          "archived": false,
+          "colour": 16777215,
+          "name": "My awesome project!"
+        }
+      },
+      "properties": {
+        "project": {
+          "description": "Project object",
+          "properties": {
+            "archived": {
+              "description": "Archived status",
+              "type": "boolean"
+            },
+            "colour": {
+              "description": "Colour associated represented by hex values casted into integer",
+              "type": "integer"
+            },
+            "name": {
+              "description": "Project name",
+              "type": "string"
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "project"
+      ],
+      "title": "Project Input",
+      "type": "object"
+    },
+    "ProjectResponse": {
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/Project",
+          "description": "response data"
+        }
+      },
+      "title": "Projects Response",
+      "type": "object"
+    },
+    "Projects": {
+      "description": "List of projects",
+      "properties": {
+        "data": {
+          "items": {
+            "$ref": "#/definitions/Project"
+          },
+          "type": "array"
+        },
+        "metadata": {
+          "properties": {
+            "total": {
+              "description": "Total number of projects",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "title": "Projects",
+      "type": "object"
+    },
+    "Timer": {
+      "description": "Timer object, represents time spend on a Task. One timer might belong to a Project",
+      "example": {
+        "description": "Working on the new feature",
+        "end_time": "2020-01-01T13:00:00Z",
+        "id": "123e4567-e89b-12d3-a456-426614174000",
+        "notes": "> This is a highly important task",
+        "project_id": "0f9ce9be-a720-41df-83bc-ad6ccb4738ec",
+        "start_time": "2020-01-01T12:00:00Z"
+      },
+      "properties": {
+        "description": {
+          "description": "Description of the timer",
+          "type": "string"
+        },
+        "end_time": {
+          "description": "End time of the timer in UTC format, a timer cannot end before it started. If not provided, timer is still running",
+          "type": "string"
+        },
+        "id": {
+          "description": "Timer ID",
+          "type": "string"
+        },
+        "notes": {
+          "description": "Notes about the timer, in markdown format",
+          "type": "string"
+        },
+        "project_id": {
+          "description": "Project ID this timer belongs to",
+          "type": "string"
+        },
+        "start_time": {
+          "description": "Start time of the timer in UTC format",
+          "type": "string"
+        }
+      },
+      "required": [
+        "start_time"
+      ],
+      "title": "Timer",
+      "type": "object"
+    },
+    "TimerInput": {
+      "description": "A timer represents time spend on a Task. Use this schema for creating or updating a timer",
+      "example": {
+        "timer": {
+          "description": "Working on the new feature",
+          "end_time": "2020-01-01T13:00:00Z",
+          "notes": "> This is a highly important task",
+          "project_id": "0f9ce9be-a720-41df-83bc-ad6ccb4738ec",
+          "start_time": "2020-01-01T12:00:00Z"
+        }
+      },
+      "properties": {
+        "timer": {
+          "description": "Timer object",
+          "properties": {
+            "description": {
+              "description": "Description of the timer",
+              "type": "string"
+            },
+            "end_time": {
+              "description": "End time of the timer in UTC format, a timer cannot end before it started. If not provided, timer is still running",
+              "type": "string"
+            },
+            "notes": {
+              "description": "Notes about the timer, in markdown format",
+              "type": "string"
+            },
+            "project_id": {
+              "description": "Project ID this timer belongs to",
+              "type": "string"
+            },
+            "start_time": {
+              "description": "Start time of the timer in UTC format",
+              "type": "string"
+            }
+          },
+          "required": [
+            "start_time"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "timer"
+      ],
+      "title": "Timer Input",
+      "type": "object"
+    },
+    "TimerResponse": {
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/Timer",
+          "description": "response data"
+        }
+      },
+      "title": "Timer Response",
+      "type": "object"
+    },
+    "Timers": {
+      "description": "A collection of timers",
+      "example": {
+        "data": [
+          {
+            "description": "Working on the new feature",
+            "end_time": "2020-01-01T13:00:00Z",
+            "id": "123e4567-e89b-12d3-a456-426614174000",
+            "notes": "> This is a highly important task",
+            "project_id": "0f9ce9be-a720-41df-83bc-ad6ccb4738ec",
+            "start_time": "2020-01-01T12:00:00Z"
+          }
+        ],
+        "metadata": {
+          "total": 1
+        }
+      },
+      "properties": {
+        "data": {
+          "items": {
+            "$ref": "#/definitions/Timer"
+          },
+          "type": "array"
+        },
+        "metadata": {
+          "properties": {
+            "total": {
+              "description": "Total number of projects",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "title": "Timers",
+      "type": "object"
+    }
+  },
+  "swagger": "2.0",
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "paths": {
+    "/projects": {
+      "get": {
+        "description": "List projects, fetches 100 unarchived projects by default",
+        "operationId": "TimecopsyncProjectsApiWeb.ProjectController.index",
+        "parameters": [
+          {
+            "description": "Number of results to show",
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "type": "integer",
+            "x-example": 1000
+          },
+          {
+            "description": "if 1 shows archived projects, defaults to 0",
+            "in": "query",
+            "name": "show_archived",
+            "required": false,
+            "type": "integer",
+            "x-example": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Projects"
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Project"
+        ]
+      },
+      "post": {
+        "description": "Create a new project",
+        "operationId": "TimecopsyncProjectsApiWeb.ProjectController.create",
+        "parameters": [
+          {
+            "description": "Project to create",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProjectInput"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ProjectResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Project"
+        ]
+      }
+    },
+    "/projects/{id}": {
+      "delete": {
+        "description": "Delete a project",
+        "operationId": "TimecopsyncProjectsApiWeb.ProjectController.delete",
+        "parameters": [
+          {
+            "description": "Project ID",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No content"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Project"
+        ]
+      },
+      "get": {
+        "description": "Get a single project",
+        "operationId": "TimecopsyncProjectsApiWeb.ProjectController.show",
+        "parameters": [
+          {
+            "description": "Project ID",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ProjectResponse"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Project"
+        ]
+      },
+      "patch": {
+        "description": "Update a project",
+        "operationId": "TimecopsyncProjectsApiWeb.ProjectController.update",
+        "parameters": [
+          {
+            "description": "Project ID",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Project to update",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProjectInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ProjectResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Project"
+        ]
+      }
+    },
+    "/timers": {
+      "get": {
+        "description": "List timers",
+        "operationId": "TimecopsyncProjectsApiWeb.TimerController.index",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Timers"
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Timer"
+        ]
+      },
+      "post": {
+        "description": "Create a new timer",
+        "operationId": "TimecopsyncProjectsApiWeb.TimerController.create",
+        "parameters": [
+          {
+            "description": "Timer to create",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TimerInput"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/TimerResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Timer"
+        ]
+      }
+    },
+    "/timers/{id}": {
+      "delete": {
+        "description": "Delete a timer",
+        "operationId": "TimecopsyncProjectsApiWeb.TimerController.delete",
+        "parameters": [
+          {
+            "description": "Timer ID",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No content"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Timer"
+        ]
+      },
+      "get": {
+        "description": "Get a single timer",
+        "operationId": "TimecopsyncProjectsApiWeb.TimerController.show",
+        "parameters": [
+          {
+            "description": "Timer ID",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/TimerResponse"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Timer"
+        ]
+      },
+      "patch": {
+        "description": "Update a timer",
+        "operationId": "TimecopsyncProjectsApiWeb.TimerController.update",
+        "parameters": [
+          {
+            "description": "Timer ID",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Timer to update",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TimerInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/TimerResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Timer"
+        ]
+      }
+    }
+  },
+  "basePath": "/api/v1"
+}
